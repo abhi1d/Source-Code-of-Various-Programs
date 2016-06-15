@@ -1,0 +1,53 @@
+#include <iostream>
+#define SIZE 100
+using namespace std;
+
+class stack
+{
+    int stck[SIZE];
+    int tos;
+public:
+    void init();
+    void push(int i);
+    int pop();
+};
+
+void stack::init()
+{
+    tos=0;
+}
+
+void stack::push(int i)
+{
+    if(tos==SIZE)
+        cout<<"stack is full.\n";
+    else
+    {
+        stck[tos] = i;
+        tos++;
+    }
+}
+
+int stack::pop()
+{
+    if(tos==0)
+        cout<<"Stack is empty.\n";
+    else
+        {
+            tos--;
+            return stck[tos];
+        }
+}
+
+int main()
+{
+    stack stack1;
+
+    stack1.init();
+
+    stack1.push(1);
+    stack1.push(3);
+
+    cout << stack1.pop() << " ";
+    cout << stack1.pop() << " ";
+}
