@@ -1,5 +1,5 @@
 # python3
-# link: https://www.hackerrank.com/challenges/diagonal-difference/submissions/code/16405117
+# link: https://www.hackerrank.com/challenges/diagonal-difference
 
 n = int(input().strip())
 a = []
