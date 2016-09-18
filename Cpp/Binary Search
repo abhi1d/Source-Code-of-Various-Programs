@@ -17,19 +17,19 @@ int main()
         cin >> a[i];
     
     bool f = false;
-    int mid, first = 0, last = n-1;
-    while(first<=last)
+    int mid, lo = 0, hi = n-1;
+    while(lo<hi)
     {
-        mid = (first+last) / 2;
+        mid = (lo+hi+1) / 2;
         if(a[mid]==n)
         {
             f = true;
             break;
         }
         if(a[mid]<n)
-            last = mid-1;
+            hi = mid;
         else if(a[mid]>n)
-            first = mid+1;
+            lo = mid+1;
     }
     if(f)
         cout << "Found";
