@@ -9,15 +9,14 @@ int front;
 int rear;
 
 void insert(int data) {
-	if((front==0 && rear==SIZE-1) || front-rear == 1) {
+	rear = (rear+1)%SIZE;
+
+	if(front==rear) {
 		puts("Queue is full");
 	}
 	else {
 		if(front == -1) {
-			front = rear = 0;
-		}
-		else {
-			rear++;
+			front = 0;
 		}
 		queue[rear] = data;
 	}
@@ -42,16 +41,30 @@ int delete() {
 }
 
 void print() {
-	int i;
+	int i=front;
 	if(front==-1)
 		puts("\nQueue is empty");
+	else if (front-rear == 1)
+	{
+		puts("\nThe queue is: ");
+		while(i!=rear) {
+			printf("%d, ", queue[i]);
+			if(i == SIZE-1 && rear!=SIZE-1)
+				i = 0;
+			else
+				i++;
+		}
+		printf("%d, ", queue[i]);
+		puts("");
+	}
 	else {
 		puts("\nThe queue is: ");
-		for(i=front; i<=rear; i++) {
-			if(i != rear)
-				printf("%d, ", queue[i]);
+		while(i!=rear+1) {
+			printf("%d, ", queue[i]);
+			if(i == SIZE-1 && rear!=SIZE-1)
+				i = 0;
 			else
-				printf("%d", queue[i]);
+				i++;
 		}
 		puts("");
 	}
