@@ -1,20 +1,23 @@
 # include <stdio.h>
 # define SIZE 5
 
-void insert(int);
-int delete();
-
 int queue[SIZE];
 int front;
 int rear;
 
-void insert(int data) {
-	rear = (rear+1)%SIZE;
+void insert() {
+	int r = rear;
+	r = (r+1)%SIZE;
 
-	if(front==rear) {
+	if(front==r) {
 		puts("Queue is full");
 	}
 	else {
+		int data;
+		puts("\nEnter the number to be inserted:");
+		scanf("%d", &data);
+
+		rear = (rear+1)%SIZE;
 		if(front == -1) {
 			front = 0;
 		}
@@ -48,19 +51,19 @@ void print() {
 	{
 		puts("\nThe queue is: ");
 		while(i!=rear) {
-			printf("%d, ", queue[i]);
+			printf("%d ", queue[i]);
 			if(i == SIZE-1 && rear!=SIZE-1)
 				i = 0;
 			else
 				i++;
 		}
-		printf("%d, ", queue[i]);
+		printf("%d ", queue[i]);
 		puts("");
 	}
 	else {
 		puts("\nThe queue is: ");
 		while(i!=rear+1) {
-			printf("%d, ", queue[i]);
+			printf("%d ", queue[i]);
 			if(i == SIZE-1 && rear!=SIZE-1)
 				i = 0;
 			else
@@ -81,9 +84,7 @@ int main() {
 		puts("\nEnter your choice:\nInsert - 1\nDelete - 2\nPrint Queue - 3\nExit - 4");
 		scanf("%d", &choice);
 		if(choice == 1) {
-			puts("\nEnter the number to be inserted:");
-			scanf("%d", &i);
-			insert(i);	
+			insert();	
 		}
 		else if(choice == 2) {
 			i = delete();
