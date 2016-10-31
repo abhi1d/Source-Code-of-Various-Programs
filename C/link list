@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
 
 struct node {
 	int data;
@@ -7,91 +7,86 @@ struct node {
 };
 struct node *head = NULL;
 
-// Length of Link list
 int len() {
-    int l = 0;
-    struct node *temp1;
-	temp1 = head;
-	while(temp1 != NULL) {
+	int l = 0;
+	struct node *temp;
+	temp = head;
+	while(temp!=NULL) {
+		temp = temp->link;
 		l++;
-		temp1 = temp1->link;
 	}
 	return l;
 }
 
-// Insert an element
 void insert() {
-    int l, d, i;
-    printf("\nEnter data and location: ");
+	int d, l;
+	struct node *new;
+	new = (struct node*)malloc(sizeof(struct node));
+	printf("Enter data and location: ");
 	scanf("%d%d", &d, &l);
 	l--;
-    
-    struct node *new, *temp;
-    new = (struct node*)malloc(sizeof(struct node));
-    new->data = d;
-    temp = head;
-    
-    if(l==0) {
-        new->link = head;
-        head = new;
-    }
-    else if(l==len()) {
-	    while(temp->link != NULL) {
-		    temp = temp->link;
-	    }
-        temp->link = new;
-	    new->link = NULL;
-	}
+
+	new->data = d;
+	new->link = NULL;
+
+	if(head == NULL)
+		head = new;
 	else {
-	    struct node *temp1;
-	    temp1 = head;
-	    for(i=0; i<l-1; i++) {
-	        temp = temp->link;
-	        temp1 = temp1->link;
-	    }
-	    temp1 = temp1->link;
-        temp->link = new;
-        new->link = temp1;
-    }
+		if(l==0) {
+			new->link = head;
+			head = new;
+		}
+		else if(l==len()) {
+			struct node *temp;
+			temp = head;
+			while(temp->link!=NULL)
+				temp = temp->link;
+			temp->link = new;
+		}
+		else {
+			struct node *temp;
+			temp = head;
+			int i;
+			for(i=0; i<l-1; i++)
+				temp = temp->link;
+			new->link = temp->link;
+			temp->link = new;
+		}
+	}
 }
 
-// Delete an element
 void delete() {
-    int l, i;
+	int l, i;
     printf("\nEnter the element number to be deleted: ");
 	scanf("%d", &l);
 	l--;
-	
+
 	struct node *temp;
     temp = head;
-    
+
     if(l==0) {
-        head = temp->link;
+    	head = head->link;
+    	temp->link = NULL;
     }
     else if(l==len()) {
-        struct node *temp1 = temp->link;
-	    while(temp1->link != NULL) {
-		    temp = temp->link;
-	    }
-        temp->link = NULL;
-	}
-	else {
-	    struct node *temp1;
-	    temp1 = head;
-	    for(i=0; i<l-1; i++) {
-	        temp = temp->link;
-	        temp1 = temp1->link;
-	    }
-	    temp1 = temp1->link;
-        temp->link = temp1->link;
-        temp1->link = NULL;
-	}
+    	for(i=0; i<l-1; i++)
+    		temp = temp->link;
+    	temp->link = NULL;
+    }
+    else {
+    	struct node *temp1;
+    	for(i=0; i<l-1; i++)
+			temp = temp->link;
+		temp1 = temp->link;
+		temp->link = temp1->link;
+		temp1->link = NULL;
+    }
 }
 
-// Traversing
 void traverse() {
 	struct node *temp1;
 	temp1 = head;
+	printf("The list is: ");
 	while(temp1 != NULL) {
 		printf("%d ", temp1->data);
 		temp1 = temp1->link;
