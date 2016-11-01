@@ -56,12 +56,12 @@ void insert() {
 }
 
 void delete() {
-	int l, i;
+    int l, i;
     printf("\nEnter the element number to be deleted: ");
-	scanf("%d", &l);
-	l--;
+    scanf("%d", &l);
+    l--;
 
-	struct node *temp;
+    struct node *temp;
     temp = head;
 
     if(l==0) {
